@@ -13,11 +13,11 @@ describe '投稿のテスト' do
         expect(page).to have_content 'ここはTopページです'
       end
       it 'top_pathが"/top"であるか' do
-        expect(current_path).to eq('/')
+        expect(current_path).to eq('/top')
       end
     end
   end
-  
+
   describe '投稿画面のテスト' do
     before do
       visit new_list_path
@@ -32,14 +32,14 @@ describe '投稿のテスト' do
     end
     context '投稿処理のテスト' do
       it '投稿後のリダイレクト先は正しいか' do
-        fill_in 'list[title]', with: Faker::Lorem.character(number:5)
-        fill_in 'list[body]', with: Faker::Lorem.character(number:20)
+        fill_in 'list[title]', with: Faker::Lorem.characters(number:5)
+        fill_in 'list[body]', with: Faker::Lorem.characters(number:20)
         click_button '投稿'
         expect(page).to have_current_path list_path(List.last)
       end
     end
   end
-  
+
   describe '一覧画面のテスト' do
     before do
       visit lists_path
@@ -51,7 +51,7 @@ describe '投稿のテスト' do
       end
     end
   end
-  
+
   describe '詳細画面のテスト' do
     before do
       visit list_path(list)
@@ -77,7 +77,7 @@ describe '投稿のテスト' do
       end
     end
   end
-  
+
   describe '編集画面のテスト' do
     before do
       visit edit_list_path(list)
@@ -94,7 +94,7 @@ describe '投稿のテスト' do
     context '更新処理に関するテスト' do
       it '更新後のリダイレクト先は正しいか' do
         fill_in 'list[title]', with: Faker::Lorem.characters(number:5)
-        fill_in 'list[body]', with: Faker::Lorem.character(number:20)
+        fill_in 'list[body]', with: Faker::Lorem.characters(number:20)
         click_button '保存'
         expect(page).to have_current_path list_path(list)
       end
